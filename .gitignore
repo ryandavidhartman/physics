@@ -27,3 +27,4 @@ cucumber/npm-debug.log
 codacy-results/
 sicp/.idea
 rtjvm/beginners/.bsp/sbt.json
+*.class
