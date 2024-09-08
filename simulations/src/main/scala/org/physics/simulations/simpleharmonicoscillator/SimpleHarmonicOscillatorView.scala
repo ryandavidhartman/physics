@@ -1,11 +1,7 @@
-package org.physics.simulations
+package org.physics.simulations.simpleharmonicoscillator
 
 import org.opensourcephysics.controls.AbstractAnimation
-import org.opensourcephysics.display.Dataset
-import org.opensourcephysics.display.DrawingFrame
-import org.opensourcephysics.display.DrawingPanel
-import org.opensourcephysics.display.PlottingPanel
-import org.opensourcephysics.display.Stripchart
+import org.opensourcephysics.display.{DrawingFrame, DrawingPanel, PlottingPanel, Stripchart}
 import org.opensourcephysics.display.axes.XAxis
 
 
@@ -17,7 +13,7 @@ import org.opensourcephysics.display.axes.XAxis
  * @author W. Christian
  * @version 1.0
  */
-class SimpleHarmonicOscillatorView() extends AbstractAnimation {
+case class SimpleHarmonicOscillatorView() extends AbstractAnimation {
   val plot = new PlottingPanel("time", "x", "x(t)")
   val plottingFrame = new DrawingFrame("SHO Data", plot)
   val drawing = new DrawingPanel
@@ -42,7 +38,9 @@ class SimpleHarmonicOscillatorView() extends AbstractAnimation {
     super.initializeAnimation()
     val x = control.getDouble("x0")
     val v = control.getDouble("v0")
-    sho.initialize(x, v, 0)
+    val k = control.getDouble("k")
+    val b = control.getDouble("b")
+    sho.initialize(x, v, k, b, 0)
     drawing.setMessage("t=0")
     stripChart.clear()
     stripChart.append(0, x)
@@ -69,6 +67,8 @@ class SimpleHarmonicOscillatorView() extends AbstractAnimation {
     super.resetAnimation()
     control.setValue("x0", 4)
     control.setValue("v0", 0)
+    control.setValue("k", 1.0)
+    control.setValue("b", 0.2)
     initializeAnimation()
   }
 }

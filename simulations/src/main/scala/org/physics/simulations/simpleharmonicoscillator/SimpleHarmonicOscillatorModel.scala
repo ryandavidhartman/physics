@@ -1,16 +1,14 @@
-package org.physics.simulations
+package org.physics.simulations.simpleharmonicoscillator
 
 import org.opensourcephysics.display.Circle
-import org.opensourcephysics.numerics.ODE
-import org.opensourcephysics.numerics.ODESolver
-import org.opensourcephysics.numerics.RK4
+import org.opensourcephysics.numerics.{ODE, ODESolver, RK4}
 
 class SimpleHarmonicOscillatorModel() extends Circle with ODE {
 
   // initial state values = {x, v, t}
   var state: Array[Double] = Array[Double](0.0, 0.0, 0.0)
-  var k: Double = 1.0;   // spring constant
-  var b: Double = 0.2    // damping constant
+  var k: Double = 1.0   // spring constant
+  var b: Double = 0.001    // damping constant
   val ode_solver: ODESolver = new RK4(this)
 
   /**
@@ -20,8 +18,11 @@ class SimpleHarmonicOscillatorModel() extends Circle with ODE {
    * @param v
    * @param t
    */
-  def initialize(x: Double, v: Double, t: Double): Unit = {
-    this.x = x;
+  def initialize(x: Double, v: Double, k: Double, b: Double, t: Double): Unit = {
+    this.x = x
+    this.k = k
+    this.b = b
+
     state = Array[Double](x, v, t)
   }
 
